@@ -1,12 +1,19 @@
 package com.platzi.platzipizzeria.persistence.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "pizza_order")
 public class OrderEntity {
     @Id
@@ -23,10 +30,11 @@ public class OrderEntity {
     private String method;
     @Column(name = "adicional_notes",length = 200)
     private String adicionalNotes;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_customer",referencedColumnName = "id_customer",updatable = false,insertable = false)
+    @JsonIgnore
     private CustomerEntity customer ;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",fetch = FetchType.EAGER)
     private List<OrderImtemEntity> items;
 
 }
