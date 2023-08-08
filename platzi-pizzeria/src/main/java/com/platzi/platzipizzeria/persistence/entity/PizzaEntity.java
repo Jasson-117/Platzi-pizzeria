@@ -21,7 +21,7 @@ public class PizzaEntity {
     @Column(nullable = false,length = 150)
     private String descripcion;
     @Column(nullable = false,columnDefinition = "Decimal(5,2)")
-    private String price;
+    private Double price;
     @Column(columnDefinition = "TINYINT")
     private boolean vegetarian;
     @Column(columnDefinition = "TINYINT")

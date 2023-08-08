@@ -34,6 +34,7 @@ public class OrderEntity {
     @JoinColumn(name = "id_customer",referencedColumnName = "id_customer",updatable = false,insertable = false)
     @JsonIgnore
     private CustomerEntity customer ;
+    @OrderBy("price DESC")
     @OneToMany(mappedBy = "order",fetch = FetchType.EAGER)
     private List<OrderImtemEntity> items;
 

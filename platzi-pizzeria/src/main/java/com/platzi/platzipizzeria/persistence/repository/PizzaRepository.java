@@ -7,8 +7,16 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.ListCrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PizzaRepository extends ListCrudRepository<PizzaEntity,Integer> {
     List<PizzaEntity> findAllByAvailableTrueOrderByPrice();
-    PizzaEntity findAllByAvailableTrueAndAvailableIgnoreCase(String name);
+    Optional<PizzaEntity> findTopByAvailableTrueAndNameIgnoreCase(String name);
+    List<PizzaEntity> findAllByAvailableTrueAndDescripcionContainingIgnoreCase(String description);
+    List<PizzaEntity> findAllByAvailableTrueAndDescripcionNotContainingIgnoreCase(String description);
+    List<PizzaEntity> findTop3ByAvailableTrueAndPriceLessThanEqualOrderByPriceAsc(double price);
+    //Con este metodo podremos saber cuantas pizzas veganas quedan
+    int countByVeganTrue();
+
+
 }
